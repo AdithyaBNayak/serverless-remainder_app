@@ -13,7 +13,8 @@ provider:
       Action: 
         - dynamodb:PutItem
         - dynamodb:GetItem
-      Resource: arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.dbTableName}
+      Resource: 
+        - arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.dbTableName}
 
 custom:
   dbTableName: remainder-table
@@ -28,6 +29,16 @@ functions:
           path: /remainder-app/add
           method: post
 
+  sendRemainder:
+    handler: remainder/sendRemainder.handler
+    events:
+      - stream:
+          type: dynamodb
+          arn:
+            Fn::GetAtt: [remainderTable, StreamArn]
+          filterPatterns:
+            - eventName: [REMOVE]  
+
 # you can add CloudFormation resource templates here
 resources:
  Resources:
@@ -39,7 +50,7 @@ resources:
           - AttributeName: user
             AttributeType: S
           - AttributeName: ttl
-            AttributeType: S  
+            AttributeType: N  
         BillingMode: PROVISIONED
         KeySchema:
           - AttributeName: user

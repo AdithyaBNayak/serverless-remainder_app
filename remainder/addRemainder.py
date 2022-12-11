@@ -17,7 +17,8 @@ def handler(event, context):
     item = {
         'user': body['user'],
         'ttl': body['ttl'],
-        'owner': body['owner']
+        'owner': body['owner'],
+        'message': body['message']
     }
 
     table.put_item(Item=item)
