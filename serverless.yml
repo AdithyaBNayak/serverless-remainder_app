@@ -15,6 +15,13 @@ provider:
         - dynamodb:GetItem
       Resource: 
         - arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.dbTableName}
+    - Effect: Allow
+      Action: 
+        - SNS:Publish
+        - SNS:SetSMSAttributes
+        - SNS:ListSMSSandboxPhoneNumbers
+      Resource:
+        - "*"      
 
 custom:
   dbTableName: remainder-table
@@ -61,7 +68,7 @@ resources:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
         StreamSpecification: 
-            StreamViewType: NEW_IMAGE
+            StreamViewType: NEW_AND_OLD_IMAGES
         TimeToLiveSpecification: 
             AttributeName: ttl
             Enabled: True
