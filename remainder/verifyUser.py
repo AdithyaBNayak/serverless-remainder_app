@@ -56,7 +56,7 @@ def handler(event, context):
                 "body": "Sent the OTP, verify it!!"
             }
 
-        return {
-                "statusCode": 500,
-                "body": "Phone number not verified.. Try Again!!"
-            }    
+    return {
+            "statusCode": 500,
+            "body": "Phone number already registered!!"
+        }    
