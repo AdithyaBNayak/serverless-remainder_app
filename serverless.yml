@@ -20,6 +20,8 @@ provider:
         - SNS:Publish
         - SNS:SetSMSAttributes
         - SNS:ListSMSSandboxPhoneNumbers
+        - SNS:CreateSMSSandboxPhoneNumber
+        - SNS:VerifySmsSandboxPhoneNumber
       Resource:
         - "*"      
 
@@ -27,6 +29,15 @@ custom:
   dbTableName: remainder-table
 
 functions:
+  verifyUser:
+    handler: remainder/verifyUser.handler
+    environment:
+      ddbName: ${self:custom.dbTableName}
+    events:
+      - http:
+          path: /verify-user/add
+          method: post
+
   addRemainder:
     handler: remainder/addRemainder.handler
     environment:
