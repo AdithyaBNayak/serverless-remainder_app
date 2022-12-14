@@ -1,4 +1,4 @@
-service: serverless-remainder-app
+service: serverless-reminder-app
 
 frameworkVersion: '2'
 
@@ -26,11 +26,11 @@ provider:
         - "*"      
 
 custom:
-  dbTableName: remainder-table
+  dbTableName: reminder-table
 
 functions:
   verifyUser:
-    handler: remainder/verifyUser.handler
+    handler: reminder/verifyUser.handler
     environment:
       ddbName: ${self:custom.dbTableName}
     events:
@@ -38,29 +38,29 @@ functions:
           path: /verify-user/add
           method: post
 
-  addRemainder:
-    handler: remainder/addRemainder.handler
+  addReminder:
+    handler: reminder/addReminder.handler
     environment:
       ddbName: ${self:custom.dbTableName}
     events:
       - http:
-          path: /remainder-app/add
+          path: /reminder-app/add
           method: post
 
-  sendRemainder:
-    handler: remainder/sendRemainder.handler
+  sendReminder:
+    handler: reminder/sendReminder.handler
     events:
       - stream:
           type: dynamodb
           arn:
-            Fn::GetAtt: [remainderTable, StreamArn]
+            Fn::GetAtt: [reminderTable, StreamArn]
           filterPatterns:
             - eventName: [REMOVE]  
 
 # you can add CloudFormation resource templates here
 resources:
  Resources:
-   remainderTable:
+   reminderTable:
      Type: AWS::DynamoDB::Table
      Properties:
         TableName: ${self:custom.dbTableName}
