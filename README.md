@@ -21,4 +21,4 @@
 - ### Text Messaging (SMS) using SNS
 
 ## Pattern 
-![pattern](https://github.com/AdithyaBNayak/serverless-remainder_app/blob/dbSTreamAndTTL/images/reminderapp.png) 
+![pattern](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/emailIntegration/images/reminderapp.png) 
