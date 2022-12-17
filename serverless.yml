@@ -23,10 +23,16 @@ provider:
         - SNS:CreateSMSSandboxPhoneNumber
         - SNS:VerifySmsSandboxPhoneNumber
       Resource:
-        - "*"      
+        - "*"
+    - Effect: Allow
+      Action: 
+        - ses:SendEmail
+      Resource:
+        - arn:aws:ses:${self:provider.region}:${aws:accountId}:identity/*
 
 custom:
   dbTableName: reminder-table
+  fromEmail: 1999adithya@gmail.com
 
 functions:
   verifyUser:
@@ -49,6 +55,8 @@ functions:
 
   sendReminder:
     handler: reminder/sendReminder.handler
+    environment:
+      fromEmail: ${self:custom.fromEmail}
     events:
       - stream:
           type: dynamodb

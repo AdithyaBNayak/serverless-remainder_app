@@ -33,7 +33,9 @@ def handler(event, context):
         'user': body['user'],
         'ttl': body['ttl'],
         'owner': body['owner'],
-        'message': body['message']
+        'message': body['message'],
+        'type': body['type'],
+        'contact': body['contact']
     }
     table.put_item(Item=item)
     logger.info("Record inserted into the DB")

@@ -4,15 +4,13 @@ import logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+client = boto3.client('sns')
+
 class SNSHelper:
     
-    def __init__(self):
-        # SNS Boto3 Client
-        self.client = boto3.client('sns')
-
     # get the list pof verified phone numbers
     def list_phone_nos(self):        
-        response = self.client.list_sms_sandbox_phone_numbers()
+        response = client.list_sms_sandbox_phone_numbers()
         logger.info(response)
         phone_nos = [phone_no['PhoneNumber'] for phone_no in response['PhoneNumbers'] 
                         if phone_no['Status'] == 'Verified']
@@ -21,11 +19,11 @@ class SNSHelper:
 
     # Sending the message through SNS
     def publish_message(self, phone_num, message):
-        set_sms_attributes = self.client.set_sms_attributes(
+        set_sms_attributes = client.set_sms_attributes(
             attributes={'DefaultSMSType': 'Transactional'}
         )
         logger.info(set_sms_attributes)
-        publish_message_response = self.client.publish(
+        publish_message_response = client.publish(
             PhoneNumber= phone_num,
             Message= message,        
         )
@@ -35,7 +33,7 @@ class SNSHelper:
 
     # Verify the OTP sent to insert the number to SMS Sandbox
     def verify_number(self, phone_num, otp):    
-        response = self.client.verify_sms_sandbox_phone_number(
+        response = client.verify_sms_sandbox_phone_number(
                     PhoneNumber=phone_num,
                     OneTimePassword=otp
                 )
@@ -43,7 +41,7 @@ class SNSHelper:
 
     # Send the OTP to the given number inorder to verify it
     def send_otp_for_verification(self, phone_num):
-        response = self.client.create_sms_sandbox_phone_number(
+        response = client.create_sms_sandbox_phone_number(
                 PhoneNumber=phone_num,
                 LanguageCode='en-US'
             )
