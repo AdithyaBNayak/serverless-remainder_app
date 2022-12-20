@@ -3,6 +3,7 @@
 - API Gateway
 - AWS Lambda
 - Simple Notification Service
+- Simple Email Service
 
 ## Concepts Covered
 - ### DynamoDB TTL
@@ -19,6 +20,7 @@
   
 - ### Lambda Event Source Filtering for DynamoDB
 - ### Text Messaging (SMS) using SNS
+- ### Sending Emails using SES
 
 ## Pattern 
 ![pattern](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/emailIntegration/images/reminderapp.png) 

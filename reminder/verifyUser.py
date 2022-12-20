@@ -1,8 +1,9 @@
 import json
 import logging
+from botocore.exceptions import ClientError
 from helper.snsFunctions import SNSHelper
 from helper.sesFunctions import SESHelper
-import boto3
+
 
 # client = boto3.client('ses')
 logger = logging.getLogger()
@@ -66,11 +67,18 @@ def handler(event, context):
         # If OTP not provided in the input, try to send it
         else:    
             logger.info("Trying to send the OTP")
-            sns.send_otp_for_verification(body['contact'])
-            return {
-                "statusCode": 200,
-                "body": "Sent the OTP, verify it!!"
-            }
+            try:
+                sns.send_otp_for_verification(body['contact'])
+                return {
+                    "statusCode": 200,
+                    "body": "Sent the OTP, verify it!!"
+                }
+            except ClientError:
+                logger.info("Error.. Check if the number you provided is right")
+                return {
+                    "statusCode": 500,
+                    "body": "Error.. Check if the number you provided is right"
+                }            
 
     return {
             "statusCode": 500,
