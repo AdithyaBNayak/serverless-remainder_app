@@ -27,8 +27,16 @@ provider:
     - Effect: Allow
       Action: 
         - ses:SendEmail
+        - ses:ListIdentities
+        - ses:VerifyEmailIdentity
       Resource:
         - arn:aws:ses:${self:provider.region}:${aws:accountId}:identity/*
+    - Effect: Allow
+      Action: 
+        - ses:ListIdentities
+        - ses:VerifyEmailIdentity
+      Resource:
+        - "*"            
 
 custom:
   dbTableName: reminder-table
@@ -37,8 +45,6 @@ custom:
 functions:
   verifyUser:
     handler: reminder/verifyUser.handler
-    environment:
-      ddbName: ${self:custom.dbTableName}
     events:
       - http:
           path: /verify-user/add
