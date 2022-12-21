@@ -1,11 +1,10 @@
 import json
 import logging
+
 from botocore.exceptions import ClientError
 from helper.snsFunctions import SNSHelper
 from helper.sesFunctions import SESHelper
 
-
-# client = boto3.client('ses')
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -14,10 +13,13 @@ def handler(event, context):
     body = json.loads(event['body'])
     logger.info(body)
 
+    # If the notification type is email
     if body['type'] == 'email':
         email_id = body['contact']
         ses = SESHelper()
 
+        # Get the list of all verified Email Ids from SES Sandbox 
+        # To check if the provided email id is already verified
         verified_emails = ses.list_verified_emails()
         if email_id in verified_emails:
             return {
@@ -25,6 +27,7 @@ def handler(event, context):
                     "body": "Email Id already verified/ Check your mail box"
                 }
 
+        #  Trying to send the verification Email
         status_code = ses.send_verification_email(email_id)
         if status_code == 200:
             return {
@@ -37,6 +40,7 @@ def handler(event, context):
             "body": "Cannot send the verification email!"
         }      
 
+    # If the notification type is SMS text
     elif body['type'] == 'text':
         sns = SNSHelper()
         # Get the list of all verified phone nos from SMS Sandbox

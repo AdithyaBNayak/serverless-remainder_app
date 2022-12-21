@@ -18,6 +18,7 @@ def handler(event, context):
     logger.info(event)
     body = json.loads(event['body'])
 
+    # If the notification type is SMS text
     if body['type'] == 'text':
         # Get the list of all verified phone nos from SMS Sandbox
         phone_nos = SNSHelper().list_phone_nos()
@@ -27,12 +28,15 @@ def handler(event, context):
                 "statusCode": 500,
                 "body": "Phone number not verified in SMS sandbox"
             }
-    elif body['type'] == 'email': 
+    # If the notification type is Email        
+    elif body['type'] == 'email':
+        # Get the list of all verified emailIds in SES Sandbox
         verified_emails = SESHelper().list_verified_emails()
+        # If email Id is not verified. Verify it first
         if body['contact'] not in verified_emails:
             return {
                 "statusCode": 500,
-                "body": "Email not verified in SES sandbox"
+                "body": "Please verify your Email Id!"
             }
 
     # Insert the record to DynamoDB
@@ -44,6 +48,8 @@ def handler(event, context):
         'type': body['type'],
         'contact': body['contact']
     }
+
+    # Insert record to DynamoDB
     table.put_item(Item=item)
     logger.info("Record inserted into the DB")
 
