@@ -14,6 +14,10 @@ This mini app allows the user to send the reminder message to a particular perso
 ## How it works
 ---
 
+Note: It is required that the EmailId or the Contact Number has to be verified in SES Sandbox and SNS Sandbox respectively inorder to send the reminder.
+![verifyUser](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/emailIntegration/images/verifyUser.png)
+You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html) account to avoid this particular step 
+
 
 
 
