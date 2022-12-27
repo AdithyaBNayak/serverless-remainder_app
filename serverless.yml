@@ -44,7 +44,7 @@ custom:
 
 functions:
   verifyUser:
-    handler: reminder/verifyUser.handler
+    handler: user/verifyUser.handler
     events:
       - http:
           path: /verify-user/add
@@ -58,6 +58,24 @@ functions:
       - http:
           path: /reminder-app/add
           method: post
+
+  getReminder:
+    handler: reminder/getReminders.getReminder
+    environment:
+      ddbName: ${self:custom.dbTableName}
+    events:
+      - http:
+          path: /reminder-app/get/{id}
+          method: get
+
+  getAllReminders:
+    handler: reminder/getReminders.getAllReminders
+    environment:
+      ddbName: ${self:custom.dbTableName}
+    events:
+      - http:
+          path: /reminder-app/getAll
+          method: get               
 
   sendReminder:
     handler: reminder/sendReminder.handler
