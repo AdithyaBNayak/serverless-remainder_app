@@ -60,6 +60,13 @@ functions:
       - http:
           path: /reminder-app/add
           method: post
+          request:
+            schemas:
+              application/json:
+                schema: ${file(post_request.json)}
+                name: addReminderModel
+                description: 'Validation model for Adding Reminder'
+
 
   getReminder:
     handler: reminder/getReminders.getReminder

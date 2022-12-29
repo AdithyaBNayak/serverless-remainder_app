@@ -1,0 +1,20 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "title": "The reminder POST Schema",
+    "required": ["ttl", "type", "message", "owner", "contact"],
+    "properties": {
+      "owner": { "type": "string" },
+      "type": { 
+        "type": "string",
+        "enum": [ "email", "text"]
+    },
+      "message": { "type": "string" },
+      "contact": { 
+        "type": "string",
+        "pattern": "([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,})|(^\\++[1-9][0-9]{7,14}$)"
+    },
+      "ttl": { "type": "number"}
+    }
+  }
