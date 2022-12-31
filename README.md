@@ -27,11 +27,8 @@ Note: It is required that the EmailId or the Contact Number has to be verified i
 
 You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html) account to avoid this particular step.
 
-<<<<<<< HEAD
-=======
 You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html) account to avoid this particular step.
 
->>>>>>> efd3c78fdbd074c89f85b98d258bf3bb5c0e7995
 
 ### AWS Services Used
 ---
@@ -41,10 +38,7 @@ You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest
 - Simple Notification Service
 - Simple Email Service
 
-<<<<<<< HEAD
 
-=======
->>>>>>> efd3c78fdbd074c89f85b98d258bf3bb5c0e7995
 ### Concepts Covered
 ---
 - #### DynamoDB TTL
@@ -57,7 +51,6 @@ You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest
   - The TTL attribute’s value must be a timestamp in Unix epoch time format in seconds.
   - The TTL attribute value must be a datetimestamp with an expiration of no more than five years in the past.
     
-<<<<<<< HEAD
 - #### DynamoDB Streams
   
 - #### Lambda Event Source Filtering for DynamoDB
@@ -98,7 +91,6 @@ You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest
 When we successfully add an Email Reminder we get the following response:
 ![addEmailReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/addemailReminderSuccess.png)
 ![addPhoneReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/success-addReminder.png)
-=======
 - #### DynamoDB Streams  
 - #### Lambda Event Source Filtering for DynamoDB
 - #### Text Messaging (SMS) using SNS
@@ -109,4 +101,3 @@ When we successfully add an Email Reminder we get the following response:
 ---
 When we successfully add an Email Reminder we get the following response:
 ![addEmailReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/getReminder/images/addemailReminderSuccess.png)
->>>>>>> efd3c78fdbd074c89f85b98d258bf3bb5c0e7995
