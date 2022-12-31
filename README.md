@@ -27,8 +27,6 @@ Note: It is required that the EmailId or the Contact Number has to be verified i
 
 You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html) account to avoid this particular step.
 
-You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html) account to avoid this particular step.
-
 
 ### AWS Services Used
 ---
@@ -91,13 +89,3 @@ You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest
 When we successfully add an Email Reminder we get the following response:
 ![addEmailReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/addemailReminderSuccess.png)
 ![addPhoneReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/success-addReminder.png)
-- #### DynamoDB Streams  
-- #### Lambda Event Source Filtering for DynamoDB
-- #### Text Messaging (SMS) using SNS
-- #### Sending Emails using SES
-- #### Request Body Validation in API Gateway
-
-### Testing
----
-When we successfully add an Email Reminder we get the following response:
-![addEmailReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/getReminder/images/addemailReminderSuccess.png)
