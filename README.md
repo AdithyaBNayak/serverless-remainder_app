@@ -14,19 +14,14 @@ This mini app allows the user to send the reminder message to a particular perso
 ## How it works
 ---
 
-Note: It is required that the EmailId or the Contact Number has to be verified in SES Sandbox and SNS Sandbox respectively inorder to send the reminder.
+Note: It is required that the EmailId or the Contact Number has to be verified in SES Sandbox and SNS Sandbox respectively inorder to send the reminder. There is a API created for the same.
 
 ![verifyUser](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/emailIntegration/images/verifyUser.png)
 
-
-You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html) account to avoid this particular step 
-
+You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html) account to avoid this particular step.
 
 
-
-
-
-## AWS Services Used
+### AWS Services Used
 ---
 - DynamoDB
 - API Gateway
@@ -34,9 +29,9 @@ You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest
 - Simple Notification Service
 - Simple Email Service
 
-## Concepts Covered
+### Concepts Covered
 ---
-- ### DynamoDB TTL
+- #### DynamoDB TTL
   Amazon DynamoDB [Time to Live](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html) (TTL) is useful to delete items that lose relevance after a specific time.
 
   Points to be noted:
@@ -44,11 +39,15 @@ You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest
   - The DB item must contain the attribute specified when TTL was enabled on the table.
   - The TTL attribute’s value must be a top-level Number data type.
   - The TTL attribute’s value must be a timestamp in Unix epoch time format in seconds.
-  - The TTL attribute value must be a datetimestamp with an expiration of no more than five years in the past
+  - The TTL attribute value must be a datetimestamp with an expiration of no more than five years in the past.
+    
+- #### DynamoDB Streams  
+- #### Lambda Event Source Filtering for DynamoDB
+- #### Text Messaging (SMS) using SNS
+- #### Sending Emails using SES
+- #### Request Body Validation in API Gateway
 
-- ### DynamoDB Streams
-  
-- ### Lambda Event Source Filtering for DynamoDB
-- ### Text Messaging (SMS) using SNS
-- ### Sending Emails using SES
-
+### Testing
+---
+When we successfully add an Email Reminder we get the following response:
+![addEmailReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/getReminder/images/addemailReminderSuccess.png)

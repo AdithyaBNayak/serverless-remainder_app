@@ -13,6 +13,8 @@ provider:
       Action: 
         - dynamodb:PutItem
         - dynamodb:GetItem
+        - dynamodb:Scan
+        - dynamodb:Query
       Resource: 
         - arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.dbTableName}
     - Effect: Allow
@@ -44,7 +46,7 @@ custom:
 
 functions:
   verifyUser:
-    handler: reminder/verifyUser.handler
+    handler: user/verifyUser.handler
     events:
       - http:
           path: /verify-user/add
@@ -58,6 +60,31 @@ functions:
       - http:
           path: /reminder-app/add
           method: post
+          request:
+            schemas:
+              application/json:
+                schema: ${file(post_request.json)}
+                name: addReminderModel
+                description: 'Validation model for Adding Reminder'
+
+
+  getReminder:
+    handler: reminder/getReminders.getReminder
+    environment:
+      ddbName: ${self:custom.dbTableName}
+    events:
+      - http:
+          path: /reminder-app/get/{id}
+          method: get
+
+  getAllReminders:
+    handler: reminder/getReminders.getAllReminders
+    environment:
+      ddbName: ${self:custom.dbTableName}
+    events:
+      - http:
+          path: /reminder-app/getAll
+          method: get               
 
   sendReminder:
     handler: reminder/sendReminder.handler

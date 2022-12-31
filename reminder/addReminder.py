@@ -36,7 +36,7 @@ def handler(event, context):
         if body['contact'] not in verified_emails:
             return {
                 "statusCode": 500,
-                "body": "Please verify your Email Id!"
+                "body": "Email Id! is not verified in Sandbox account"
             }
 
     # Insert the record to DynamoDB
