@@ -1,6 +1,6 @@
 import boto3
-import os
 import logging
+import configparser
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -11,8 +11,12 @@ class SESHelper:
 
     # Function responsible to send the Email
     def send_email(self, email_id, message):
+        config = configparser.ConfigParser()
+        config.readfp(open(r'config.conf'))
+        from_email = config.get('Configuration', 'from_email')
+
         send_email = client.send_email(
-            Source= os.environ['fromEmail'],
+            Source= from_email,
             Destination={
                 'ToAddresses': [email_id],                
             },

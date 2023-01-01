@@ -42,7 +42,6 @@ provider:
 
 custom:
   dbTableName: reminder-table
-  fromEmail: 1999adithya@gmail.com
 
 functions:
   verifyUser:
@@ -88,8 +87,6 @@ functions:
 
   sendReminder:
     handler: reminder/sendReminder.handler
-    environment:
-      fromEmail: ${self:custom.fromEmail}
     events:
       - stream:
           type: dynamodb
