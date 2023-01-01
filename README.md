@@ -75,7 +75,7 @@ You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest
           name: addReminderModel
           description: 'Validation model for Adding Reminder'
     ```
-  ANy validation failure will result in status code '400', with the message 'Invalid Request Body' as shown in the figures below.  
+  Any validation failure will result in status code '400', with the message 'Invalid Request Body' as shown in the figures below.  
   ![models](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/contact-regexerror.png)
   In the above image, we see that the regex doesnt match with the emailId provided.
   ![models](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/enum-error.png)
