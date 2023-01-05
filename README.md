@@ -18,6 +18,7 @@ This mini app allows the user to send the reminder message to a particular perso
 ---
 
 Note: It is required that the EmailId or the Contact Number has to be verified in SES Sandbox and SNS Sandbox respectively inorder to send the reminder. There is a API created for the same.
+We check for the list of all verified emailIds and phone numbers, send and verify OTPs/send verification emails.  
 
 ![verifyUser](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/verifyUser.png)
 
@@ -170,7 +171,6 @@ You can also try to move out of [Sandbox](https://docs.aws.amazon.com/ses/latest
   ```
 
 
-### Testing
 ---
 When we successfully add an Email Reminder we get the following response:
 ![addEmailReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/addemailReminderSuccess.png)
@@ -181,3 +181,5 @@ Successfully adding SMS text reminder:
 Reminder messages in phone and email is shown below:
 ![phoneReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/text-reminder.jpeg)
 ![emailReminder](https://github.com/AdithyaBNayak/serverless-reminder_app/blob/main/images/email-reminder.jpeg)
+
+Note: There is also endpoints created to fetch each reminder record based on its id(contact)(`/reminder-app/get/{id}`) and also list of all configured reminders (`/reminder-app/getAll`).
